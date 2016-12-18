@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.yuda.coolweather.db.DaoMaster;
 import com.yuda.coolweather.ui.activity.WeatherActivity;
 
 import butterknife.ButterKnife;

@@ -22,7 +22,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import com.yuda.coolweather.MainActivity;
-import com.yuda.coolweather.MyApplication;
 import com.yuda.coolweather.R;
 import com.yuda.coolweather.db.City;
 import com.yuda.coolweather.db.CityDao;

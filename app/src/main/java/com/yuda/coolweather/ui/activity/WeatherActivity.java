@@ -27,9 +27,6 @@ import com.yuda.coolweather.bean.HeWeather;
 import com.yuda.coolweather.utils.HttpUtil;
 import com.yuda.coolweather.utils.Utility;
 
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 
 import butterknife.BindView;
