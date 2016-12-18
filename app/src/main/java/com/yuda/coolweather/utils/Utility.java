@@ -2,6 +2,8 @@ package com.yuda.coolweather.utils;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.yuda.coolweather.bean.HeWeather;
 import com.yuda.coolweather.db.City;
 import com.yuda.coolweather.db.CityDao;
 import com.yuda.coolweather.db.County;
@@ -92,4 +94,18 @@ public class Utility {
         return false;
     }
 
+    /**
+     * 返回的JSON数据解析成Weather实体类
+     */
+    public static HeWeather handleWeatherResponse(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,HeWeather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

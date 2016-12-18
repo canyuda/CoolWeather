@@ -1,6 +1,7 @@
 package com.yuda.coolweather.ui.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
+import com.yuda.coolweather.MainActivity;
 import com.yuda.coolweather.MyApplication;
 import com.yuda.coolweather.R;
 import com.yuda.coolweather.db.City;
@@ -30,6 +32,7 @@ import com.yuda.coolweather.db.DaoMaster;
 import com.yuda.coolweather.db.DaoSession;
 import com.yuda.coolweather.db.Provice;
 import com.yuda.coolweather.db.ProviceDao;
+import com.yuda.coolweather.ui.activity.WeatherActivity;
 import com.yuda.coolweather.utils.DBManager;
 import com.yuda.coolweather.utils.HttpUtil;
 import com.yuda.coolweather.utils.Utility;
@@ -90,8 +93,18 @@ public class ChooseAreaFragment extends Fragment {
                     selectedCity = mCityList.get(i);
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY){
-                    Toast.makeText(MyApplication.getContext(),
-                            mCountyList.get(i).getWeatherId(), Toast.LENGTH_SHORT).show();
+                    String weatherId = mCountyList.get(i).getWeatherId();
+                    if (getActivity() instanceof MainActivity){
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.drawerlayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
